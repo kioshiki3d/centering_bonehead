@@ -13,7 +13,7 @@ from mathutils import Matrix, Vector
 bl_info = {
     "name": "centering bonehead",
     "author": "Kageji",
-    "version": (0, 0, 1),
+    "version": (0, 0, 2),
     "blender": (4, 2, 0),
     "location": "3D View > Sidebar",
     "description": "centering bonehead",
@@ -35,6 +35,7 @@ class KJ_CBH_Panel(Panel):
         layout = self.layout
         scene = context.scene
         mode = context.mode
+        # 近くのボーンを中点にもってくる
         layout.label(text="simple centering bonehead")
         simple_btn = layout.row(align=True)
         simple_enble = False
@@ -42,7 +43,8 @@ class KJ_CBH_Panel(Panel):
             simple_enble = True
         simple_btn.enabled = simple_enble
         simple_btn.operator(KJ_CenteringBoneHead.bl_idname, text="Centering").slot = 0
-
+        # 中点を保存して、ボーンを選んでから中点にもってくる
+        layout.separator()
         layout.label(text="advance centering bonehead")
         advance_btn = layout.row(align=True)
         advance_enble = False
